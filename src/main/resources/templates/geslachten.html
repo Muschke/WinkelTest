@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title='geslachten')"></head>
+<body>
+<h1>Scruples</h1>
+<nav th:replace="fragments::menu"></nav>
+<h2>Geslachten</h2>
+</body>
+<!-- Overzicht weergeven van alle huidige geslachten-->
+<h2>Geslacht toevoegen</h2>
+<form th:object="${geslacht}" method="post" th:action="@{/geslachten}">
+    <label>Naam:<span th:errors="*{geslacht}"></span><input th:field="*{geslacht}" type="text" autofocus required></label>
+    <input type="hidden" name="id" value="0">
+    <button>Geslacht toevoegen</button>
+</form>
+
+
+<h2>Overzicht huidige geslachten</h2>
+<table>
+    <thead>
+    <th>Id</th>
+    <th>Omschrijving</th>
+    <th></th>
+    <th></th>
+    </thead>
+    <tbody>
+
+            <tr th:each="sex: ${vindAlleGeslachten}" th:object="${sex}">
+
+                <form th:if$="not ${vindAlleGeslachten.isEmpty()}" th:action="@{/geslachten/verwijderen}" method="post">
+
+                <td th:text="*{id}"></td>
+                <td th:text="*{geslacht}"></td>
+                <td><input type="checkbox" name="id" th:value="*{id}"></td>
+                    <td><button>Verwijderen</button></td>
+                </form>
+            </tr>
+    </tbody>
+
+
+
+</table>
+</html>

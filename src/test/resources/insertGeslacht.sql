@@ -1,0 +1,1 @@
+insert into Geslacht (Geslacht) values ('man'), ('vrouw');
